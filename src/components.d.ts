@@ -6,56 +6,61 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface UcSideDrawer {
+        "open": () => Promise<void>;
+        "opened": boolean;
+        "title": string;
+    }
+    interface UcTooltip {
+        "text": string;
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLUcSideDrawerElement extends Components.UcSideDrawer, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLUcSideDrawerElement: {
+        prototype: HTMLUcSideDrawerElement;
+        new (): HTMLUcSideDrawerElement;
+    };
+    interface HTMLUcTooltipElement extends Components.UcTooltip, HTMLStencilElement {
+    }
+    var HTMLUcTooltipElement: {
+        prototype: HTMLUcTooltipElement;
+        new (): HTMLUcTooltipElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "uc-side-drawer": HTMLUcSideDrawerElement;
+        "uc-tooltip": HTMLUcTooltipElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface UcSideDrawer {
+        "opened"?: boolean;
+        "title"?: string;
     }
+    interface UcTooltip {
+        "text"?: string;
+    }
+
+    interface UcSideDrawerAttributes {
+        "title": string;
+        "opened": boolean;
+    }
+    interface UcTooltipAttributes {
+        "text": string;
+    }
+
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "uc-side-drawer": Omit<UcSideDrawer, keyof UcSideDrawerAttributes> & { [K in keyof UcSideDrawer & keyof UcSideDrawerAttributes]?: UcSideDrawer[K] } & { [K in keyof UcSideDrawer & keyof UcSideDrawerAttributes as `attr:${K}`]?: UcSideDrawerAttributes[K] } & { [K in keyof UcSideDrawer & keyof UcSideDrawerAttributes as `prop:${K}`]?: UcSideDrawer[K] };
+        "uc-tooltip": Omit<UcTooltip, keyof UcTooltipAttributes> & { [K in keyof UcTooltip & keyof UcTooltipAttributes]?: UcTooltip[K] } & { [K in keyof UcTooltip & keyof UcTooltipAttributes as `attr:${K}`]?: UcTooltipAttributes[K] } & { [K in keyof UcTooltip & keyof UcTooltipAttributes as `prop:${K}`]?: UcTooltip[K] };
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "uc-side-drawer": LocalJSX.IntrinsicElements["uc-side-drawer"] & JSXBase.HTMLAttributes<HTMLUcSideDrawerElement>;
+            "uc-tooltip": LocalJSX.IntrinsicElements["uc-tooltip"] & JSXBase.HTMLAttributes<HTMLUcTooltipElement>;
         }
     }
 }

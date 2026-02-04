@@ -4,11 +4,50 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
     <title>Stencil Component Starter</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
 
+      .side-nav ul {
+        list-style: none;
+      }
+
+      .side-nav li {
+        margin: 1rem 0;
+      }
+
+      .side-nav a {
+        text-decoration: none;
+        color: #000000;
+      }
+
+    </style>
     <script type="module" src="/build/web-components-stencil.esm.js"></script>
     <script nomodule src="/build/web-components-stencil.js"></script>
   </head>
   <body>
-    <my-component first="Stencil" middle="'Don't call me a framework'" last="JS"></my-component>
+    <button id="side-drawer-btn">Open Side Menu</button>
+    <p>Let's test this new <uc-tooltip text="We built this before, now it is better!">Tooltip!</uc-tooltip></p>
+    <uc-side-drawer title="Main Menu">
+    <nav class="side-nav">
+      <ul>
+        <li><a href="/_">A Link</a></li>
+        </li><li><a href="/_">Another Link</a></li>
+        </li><li><a href="/_">A third Link</a></li>
+      </ul>
+    </nav>
+    </uc-side-drawer>
+
+    <script>
+      const sideDrawerButton = document.querySelector('#side-drawer-btn');
+      const sideDrawer = document.querySelector('uc-side-drawer');
+      sideDrawerButton.addEventListener('click', () => {
+        if(!sideDrawer.opened) {
+          console.log('Opening side drawer...');
+          sideDrawer.open();
+        }
+      });
+    </script>
   </body>
 </html>
