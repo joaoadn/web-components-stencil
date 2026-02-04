@@ -11,6 +11,8 @@ export namespace Components {
         "opened": boolean;
         "title": string;
     }
+    interface UcStockPrice {
+    }
     interface UcTooltip {
         "text": string;
     }
@@ -22,6 +24,12 @@ declare global {
         prototype: HTMLUcSideDrawerElement;
         new (): HTMLUcSideDrawerElement;
     };
+    interface HTMLUcStockPriceElement extends Components.UcStockPrice, HTMLStencilElement {
+    }
+    var HTMLUcStockPriceElement: {
+        prototype: HTMLUcStockPriceElement;
+        new (): HTMLUcStockPriceElement;
+    };
     interface HTMLUcTooltipElement extends Components.UcTooltip, HTMLStencilElement {
     }
     var HTMLUcTooltipElement: {
@@ -30,6 +38,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "uc-side-drawer": HTMLUcSideDrawerElement;
+        "uc-stock-price": HTMLUcStockPriceElement;
         "uc-tooltip": HTMLUcTooltipElement;
     }
 }
@@ -37,6 +46,8 @@ declare namespace LocalJSX {
     interface UcSideDrawer {
         "opened"?: boolean;
         "title"?: string;
+    }
+    interface UcStockPrice {
     }
     interface UcTooltip {
         "text"?: string;
@@ -52,6 +63,7 @@ declare namespace LocalJSX {
 
     interface IntrinsicElements {
         "uc-side-drawer": Omit<UcSideDrawer, keyof UcSideDrawerAttributes> & { [K in keyof UcSideDrawer & keyof UcSideDrawerAttributes]?: UcSideDrawer[K] } & { [K in keyof UcSideDrawer & keyof UcSideDrawerAttributes as `attr:${K}`]?: UcSideDrawerAttributes[K] } & { [K in keyof UcSideDrawer & keyof UcSideDrawerAttributes as `prop:${K}`]?: UcSideDrawer[K] };
+        "uc-stock-price": UcStockPrice;
         "uc-tooltip": Omit<UcTooltip, keyof UcTooltipAttributes> & { [K in keyof UcTooltip & keyof UcTooltipAttributes]?: UcTooltip[K] } & { [K in keyof UcTooltip & keyof UcTooltipAttributes as `attr:${K}`]?: UcTooltipAttributes[K] } & { [K in keyof UcTooltip & keyof UcTooltipAttributes as `prop:${K}`]?: UcTooltip[K] };
     }
 }
@@ -60,6 +72,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "uc-side-drawer": LocalJSX.IntrinsicElements["uc-side-drawer"] & JSXBase.HTMLAttributes<HTMLUcSideDrawerElement>;
+            "uc-stock-price": LocalJSX.IntrinsicElements["uc-stock-price"] & JSXBase.HTMLAttributes<HTMLUcStockPriceElement>;
             "uc-tooltip": LocalJSX.IntrinsicElements["uc-tooltip"] & JSXBase.HTMLAttributes<HTMLUcTooltipElement>;
         }
     }
