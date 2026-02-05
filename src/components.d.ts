@@ -12,6 +12,7 @@ export namespace Components {
         "title": string;
     }
     interface UcStockPrice {
+        "stockSymbol": string;
     }
     interface UcTooltip {
         "text": string;
@@ -48,6 +49,7 @@ declare namespace LocalJSX {
         "title"?: string;
     }
     interface UcStockPrice {
+        "stockSymbol"?: string;
     }
     interface UcTooltip {
         "text"?: string;
@@ -57,13 +59,16 @@ declare namespace LocalJSX {
         "title": string;
         "opened": boolean;
     }
+    interface UcStockPriceAttributes {
+        "stockSymbol": string;
+    }
     interface UcTooltipAttributes {
         "text": string;
     }
 
     interface IntrinsicElements {
         "uc-side-drawer": Omit<UcSideDrawer, keyof UcSideDrawerAttributes> & { [K in keyof UcSideDrawer & keyof UcSideDrawerAttributes]?: UcSideDrawer[K] } & { [K in keyof UcSideDrawer & keyof UcSideDrawerAttributes as `attr:${K}`]?: UcSideDrawerAttributes[K] } & { [K in keyof UcSideDrawer & keyof UcSideDrawerAttributes as `prop:${K}`]?: UcSideDrawer[K] };
-        "uc-stock-price": UcStockPrice;
+        "uc-stock-price": Omit<UcStockPrice, keyof UcStockPriceAttributes> & { [K in keyof UcStockPrice & keyof UcStockPriceAttributes]?: UcStockPrice[K] } & { [K in keyof UcStockPrice & keyof UcStockPriceAttributes as `attr:${K}`]?: UcStockPriceAttributes[K] } & { [K in keyof UcStockPrice & keyof UcStockPriceAttributes as `prop:${K}`]?: UcStockPrice[K] };
         "uc-tooltip": Omit<UcTooltip, keyof UcTooltipAttributes> & { [K in keyof UcTooltip & keyof UcTooltipAttributes]?: UcTooltip[K] } & { [K in keyof UcTooltip & keyof UcTooltipAttributes as `attr:${K}`]?: UcTooltipAttributes[K] } & { [K in keyof UcTooltip & keyof UcTooltipAttributes as `prop:${K}`]?: UcTooltip[K] };
     }
 }
