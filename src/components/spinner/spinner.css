@@ -1,52 +1,3 @@
-:host {
-    font-family: sans-serif;
-    border: 2px solid purple;
-    margin: 2rem;
-    padding: 1rem;
-    display: block;
-}
-
-:host(.error) {
-    border-color: red;
-}
-
-form input {
-    font: inherit;
-    color: solid purple;
-    padding: 0.1rem 0.25rem;
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-form input:focus, 
-form button:focus {
-    outline: none;
-
-}
-
-form button {
-    font: inherit;
-    padding: 0.25rem 0.5rem;
-    border: 1px solid purple;
-    background: purple;
-    color: white;
-    cursor: pointer;
-}
-
-form button:hover,
-form button:active {
-    background: rgb(177, 1, 177);
-    border-color: rgb(177, 1, 177);
-}
-
-form button:disabled {
-    background: #ccc;
-    border-color: #ccc;
-    color: white;
-    cursor: not-allowed;
-}
-
-
 .lds-ring,
 .lds-ring div {
     box-sizing: border-box;
@@ -86,7 +37,3 @@ form button:disabled {
     transform: rotate(360deg);
     }
 }
-
-
-
-
