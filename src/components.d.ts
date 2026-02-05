@@ -6,10 +6,14 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface StockFinder {
+    }
     interface UcSideDrawer {
         "open": () => Promise<void>;
         "opened": boolean;
         "title": string;
+    }
+    interface UcStockFinder {
     }
     interface UcStockPrice {
         "stockSymbol": string;
@@ -18,12 +22,39 @@ export namespace Components {
         "text": string;
     }
 }
+export interface UcStockFinderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLUcStockFinderElement;
+}
 declare global {
+    interface HTMLStockFinderElement extends Components.StockFinder, HTMLStencilElement {
+    }
+    var HTMLStockFinderElement: {
+        prototype: HTMLStockFinderElement;
+        new (): HTMLStockFinderElement;
+    };
     interface HTMLUcSideDrawerElement extends Components.UcSideDrawer, HTMLStencilElement {
     }
     var HTMLUcSideDrawerElement: {
         prototype: HTMLUcSideDrawerElement;
         new (): HTMLUcSideDrawerElement;
+    };
+    interface HTMLUcStockFinderElementEventMap {
+        "ucsymbolSelected": string;
+    }
+    interface HTMLUcStockFinderElement extends Components.UcStockFinder, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLUcStockFinderElementEventMap>(type: K, listener: (this: HTMLUcStockFinderElement, ev: UcStockFinderCustomEvent<HTMLUcStockFinderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLUcStockFinderElementEventMap>(type: K, listener: (this: HTMLUcStockFinderElement, ev: UcStockFinderCustomEvent<HTMLUcStockFinderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLUcStockFinderElement: {
+        prototype: HTMLUcStockFinderElement;
+        new (): HTMLUcStockFinderElement;
     };
     interface HTMLUcStockPriceElement extends Components.UcStockPrice, HTMLStencilElement {
     }
@@ -38,15 +69,22 @@ declare global {
         new (): HTMLUcTooltipElement;
     };
     interface HTMLElementTagNameMap {
+        "stock-finder": HTMLStockFinderElement;
         "uc-side-drawer": HTMLUcSideDrawerElement;
+        "uc-stock-finder": HTMLUcStockFinderElement;
         "uc-stock-price": HTMLUcStockPriceElement;
         "uc-tooltip": HTMLUcTooltipElement;
     }
 }
 declare namespace LocalJSX {
+    interface StockFinder {
+    }
     interface UcSideDrawer {
         "opened"?: boolean;
         "title"?: string;
+    }
+    interface UcStockFinder {
+        "onUcsymbolSelected"?: (event: UcStockFinderCustomEvent<string>) => void;
     }
     interface UcStockPrice {
         "stockSymbol"?: string;
@@ -67,7 +105,9 @@ declare namespace LocalJSX {
     }
 
     interface IntrinsicElements {
+        "stock-finder": StockFinder;
         "uc-side-drawer": Omit<UcSideDrawer, keyof UcSideDrawerAttributes> & { [K in keyof UcSideDrawer & keyof UcSideDrawerAttributes]?: UcSideDrawer[K] } & { [K in keyof UcSideDrawer & keyof UcSideDrawerAttributes as `attr:${K}`]?: UcSideDrawerAttributes[K] } & { [K in keyof UcSideDrawer & keyof UcSideDrawerAttributes as `prop:${K}`]?: UcSideDrawer[K] };
+        "uc-stock-finder": UcStockFinder;
         "uc-stock-price": Omit<UcStockPrice, keyof UcStockPriceAttributes> & { [K in keyof UcStockPrice & keyof UcStockPriceAttributes]?: UcStockPrice[K] } & { [K in keyof UcStockPrice & keyof UcStockPriceAttributes as `attr:${K}`]?: UcStockPriceAttributes[K] } & { [K in keyof UcStockPrice & keyof UcStockPriceAttributes as `prop:${K}`]?: UcStockPrice[K] };
         "uc-tooltip": Omit<UcTooltip, keyof UcTooltipAttributes> & { [K in keyof UcTooltip & keyof UcTooltipAttributes]?: UcTooltip[K] } & { [K in keyof UcTooltip & keyof UcTooltipAttributes as `attr:${K}`]?: UcTooltipAttributes[K] } & { [K in keyof UcTooltip & keyof UcTooltipAttributes as `prop:${K}`]?: UcTooltip[K] };
     }
@@ -76,7 +116,9 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "stock-finder": LocalJSX.IntrinsicElements["stock-finder"] & JSXBase.HTMLAttributes<HTMLStockFinderElement>;
             "uc-side-drawer": LocalJSX.IntrinsicElements["uc-side-drawer"] & JSXBase.HTMLAttributes<HTMLUcSideDrawerElement>;
+            "uc-stock-finder": LocalJSX.IntrinsicElements["uc-stock-finder"] & JSXBase.HTMLAttributes<HTMLUcStockFinderElement>;
             "uc-stock-price": LocalJSX.IntrinsicElements["uc-stock-price"] & JSXBase.HTMLAttributes<HTMLUcStockPriceElement>;
             "uc-tooltip": LocalJSX.IntrinsicElements["uc-tooltip"] & JSXBase.HTMLAttributes<HTMLUcTooltipElement>;
         }
